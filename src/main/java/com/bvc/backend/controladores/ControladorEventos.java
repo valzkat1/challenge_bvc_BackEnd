@@ -54,6 +54,24 @@ public class ControladorEventos {
 		//return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
+	
+	@GetMapping("/Eventos/fecha")
+	//public List<Eventos> consultaEventos(){
+		public ResponseEntity<List<Eventos>> getEventosFecha(@RequestParam(required = false) String fecha) {		
+		List<Eventos> even = new ArrayList<Eventos>();
+		if (fecha == null)
+			EventoRepo.findAll().forEach(even::add);
+		else
+			//EventoRepo.findByOrigeneventoContaining(origenevento).forEach(even::add);
+		    EventoRepo.findByFechaContaining(fecha).forEach(even::add);
+		//List<Eventos> response=EventoRepo.findAll();
+		if (even.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(even, HttpStatus.OK);
+		//return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	
 	//@CrossOrigin(origins = "*") 
 	@PostMapping("/Eventos")
 	public ResponseEntity<Eventos> createEvento(@RequestBody Eventos evento) {
@@ -103,6 +121,8 @@ public class ControladorEventos {
 	public ResponseEntity<Eventos> updateEvento(@PathVariable("id") long id, @RequestBody Eventos eves) {
 		Optional<Eventos> evenData = EventoRepo.findById(id);
 
+		System.out.println(eves.toString()+"*****");
+		
 		if (evenData.isPresent()) {
 			Eventos eve = evenData.get();
 			eve.setCantidad(eves.getCantidad());

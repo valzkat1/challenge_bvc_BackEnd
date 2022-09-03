@@ -8,4 +8,6 @@ import com.bvc.backend.modelos.Eventos;
 
 public interface RepoEventos extends JpaRepository<Eventos, Long>{
 	List<Eventos> findByOrigeneventoContaining(String origenevento);
+	List<Eventos> findByFechaContaining(String fecha);
+	
 }
