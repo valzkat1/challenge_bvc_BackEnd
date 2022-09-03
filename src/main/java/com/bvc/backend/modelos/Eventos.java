@@ -19,18 +19,30 @@ import javax.persistence.Table;
 public class Eventos {
 
 	
-	private enum plataforma{PACTO,DEPO,BAKO,PLATGI};
+	//private enum plataforma{PACTO,DEPO,BAKO,PLATGI};
 	
+	@Override
+	public String toString() {
+		return "Eventos [id=" + id + ", origenevento=" + origenevento + ", cantidad=" + cantidad + ", fecha=" + fecha
+				+ ", total=" + total + ", tipoevento=" + tipoevento + "]";
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;	
-	private plataforma origenevento;
+	private String origenevento;
 	private int cantidad;
 	private Date fecha;
 	private  double total;
+	private String tipoevento;
 	
 	
 	
+	public String getTipoevento() {
+		return tipoevento;
+	}
+	public void setTipoevento(String tipoevento) {
+		this.tipoevento = tipoevento;
+	}
 	public double getTotal() {
 		return total;
 	}
@@ -46,10 +58,10 @@ public class Eventos {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public plataforma getOrigenevento() {
+	public String getOrigenevento() {
 		return origenevento;
 	}
-	public void setOrigenevento(plataforma origenevento) {
+	public void setOrigenevento(String origenevento) {
 		this.origenevento = origenevento;
 	}
 	public int getCantidad() {
