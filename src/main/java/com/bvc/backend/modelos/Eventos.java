@@ -27,9 +27,16 @@ public class Eventos {
 	private plataforma origenevento;
 	private int cantidad;
 	private Date fecha;
+	private  double total;
 	
 	
 	
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	public Eventos() {
 		super();
 	}
