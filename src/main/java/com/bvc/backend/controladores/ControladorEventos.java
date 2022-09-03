@@ -40,7 +40,7 @@ public class ControladorEventos {
 
 	@GetMapping("/Eventos")
 	//public List<Eventos> consultaEventos(){
-		public ResponseEntity<List<Eventos>> getAllTutorials(@RequestParam(required = false) String origenevento) {		
+		public ResponseEntity<List<Eventos>> getAllEventos(@RequestParam(required = false) String origenevento) {		
 		List<Eventos> even = new ArrayList<Eventos>();
 		if (origenevento == null)
 			EventoRepo.findAll().forEach(even::add);
@@ -54,9 +54,9 @@ public class ControladorEventos {
 		//return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
-	@CrossOrigin(origins = "*") 
+	//@CrossOrigin(origins = "*") 
 	@PostMapping("/Eventos")
-	public ResponseEntity<Eventos> createTutorial(@RequestBody Eventos evento) {
+	public ResponseEntity<Eventos> createEvento(@RequestBody Eventos evento) {
 		
 		System.out.println(evento.toString()+"*******");
 		
@@ -85,9 +85,9 @@ public class ControladorEventos {
 		}
 	}
 	
-    @CrossOrigin(origins = "*")
+   // @CrossOrigin(origins = "*")
 	@GetMapping("/Eventos/{id}")
-	public ResponseEntity<Eventos> getTutorialById(@PathVariable("id") long id) {
+	public ResponseEntity<Eventos> getEventoById(@PathVariable("id") long id) {
 		Optional<Eventos> eventosData = EventoRepo.findById(id);
 
 		if (eventosData.isPresent()) {
@@ -98,7 +98,7 @@ public class ControladorEventos {
 	}
 
     
-  	@CrossOrigin(origins = "*")
+  	//@CrossOrigin(origins = "*")
 	@PutMapping("/Eventos/{id}")
 	public ResponseEntity<Eventos> updateEvento(@PathVariable("id") long id, @RequestBody Eventos eves) {
 		Optional<Eventos> tutorialData = EventoRepo.findById(id);
@@ -116,7 +116,7 @@ public class ControladorEventos {
     
     
   	
-  	@CrossOrigin(origins = "*")
+  	//@CrossOrigin(origins = "*")
 	@DeleteMapping("/Eventos/{id}")
 	public ResponseEntity<HttpStatus> deleteEvento(@PathVariable("id") long id) {
 		try {
