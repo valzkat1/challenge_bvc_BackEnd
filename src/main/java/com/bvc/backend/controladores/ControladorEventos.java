@@ -101,13 +101,26 @@ public class ControladorEventos {
   	//@CrossOrigin(origins = "*")
 	@PutMapping("/Eventos/{id}")
 	public ResponseEntity<Eventos> updateEvento(@PathVariable("id") long id, @RequestBody Eventos eves) {
-		Optional<Eventos> tutorialData = EventoRepo.findById(id);
+		Optional<Eventos> evenData = EventoRepo.findById(id);
 
-		if (tutorialData.isPresent()) {
-			Eventos eve = tutorialData.get();
+		if (evenData.isPresent()) {
+			Eventos eve = evenData.get();
 			eve.setCantidad(eves.getCantidad());
 			eve.setOrigenevento(eves.getOrigenevento());
-			eve.setFecha(eves.getFecha());
+			eve.setTipoevento(eves.getTipoevento());
+			if(eves.getTipoevento().equals("F001")) {
+				 eve.setTotal(eves.getCantidad()*20.5);
+				}else if(eves.getTipoevento().equals("F002")) {
+				 eve.setTotal(eves.getCantidad()*200);
+				}else if(eves.getTipoevento().equals("F003")) {
+					eve.setTotal(eves.getCantidad()*55.9);
+				}else if(eves.getTipoevento().equals("F004")) {
+					eve.setTotal(eves.getCantidad()*100);
+				}else if(eves.getTipoevento().equals("F005")) {
+					eve.setTotal(eves.getCantidad()*32);
+				}	
+			
+			//eve.setFecha(eves.getFecha());
 			return new ResponseEntity<>(EventoRepo.save(eve), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
